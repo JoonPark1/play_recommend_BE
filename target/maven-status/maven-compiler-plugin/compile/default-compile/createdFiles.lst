@@ -1,6 +1,7 @@
+com/example/play_app_backend/SpotifyApiClient.class
 com/example/play_app_backend/controllers/AuthController.class
 com/example/play_app_backend/MyApplication.class
 com/example/play_app_backend/TokenResponse.class
 com/example/play_app_backend/CorsConfig.class
-com/example/play_app_backend/controllers/FormController.class
 com/example/play_app_backend/FormData.class
+com/example/play_app_backend/controllers/FormController.class

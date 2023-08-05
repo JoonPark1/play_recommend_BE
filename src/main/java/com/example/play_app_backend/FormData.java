@@ -27,4 +27,12 @@ public class FormData {
                 ", extra='" + extra + '\'' +
                 '}';
     }
+
+    public String getArtist(){
+        return artist;
+    }
+
+    public String getGenre(){
+        return genre;
+    }
 }

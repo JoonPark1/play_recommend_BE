@@ -1,6 +1,11 @@
 /Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/controllers/FormController.java
+/Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/models/TrackList.java
+/Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/models/Artist.java
 /Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/FormData.java
 /Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/TokenResponse.java
+/Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/models/SpotifyResponse.java
+/Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/models/TrackItem.java
 /Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/controllers/AuthController.java
 /Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/CorsConfig.java
+/Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/SpotifyApiClient.java
 /Users/joonlegend/IdeaProjects/play_recommend_backend/src/main/java/com/example/play_app_backend/MyApplication.java

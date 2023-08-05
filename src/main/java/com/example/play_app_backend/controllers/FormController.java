@@ -6,8 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.play_app_backend.FormData;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.ResponseEntity;
 import com.example.play_app_backend.SpotifyApiClient;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.play_app_backend.models.SpotifyResponse; 
+import com.example.play_app_backend.models.TrackItem; 
+import com.example.play_app_backend.models.Artist; 
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -20,10 +24,9 @@ public class FormController {
 
     // helper to construct the query parameter q's query string!
     public String constructQueryString(FormData d) {
-        String query = String.format("artist:%s genre:%s decade:%s",
+        String query = String.format("artist:%s genre:%s",
                 d.getArtist(),
-                d.getGenre(),
-                d.getDecade());
+                d.getGenre());
         System.out.printf("Query String: %s", query);
         return query;
     }
@@ -31,7 +34,8 @@ public class FormController {
     @PostMapping
     public String handleFormSubmission(@RequestBody FormData data) {
         try {
-            String accessToken = spotifyClient.getAccessToken();
+            String accessToken = spotifyClient.getAccessToken(); 
+            System.out.println("accessToken: " + accessToken); 
             // now, with accessToken, we should utilize the data gotten from front-end to
             // look for Spotify tracks
             // that best match user criteria!
@@ -40,13 +44,27 @@ public class FormController {
             String apiUrl = "https://api.spotify.com/v1/search";
             String queryString = constructQueryString(data);
             // full url containing necessary query params!
-            String fullUrl = apiUrl + '?' + "q=" + queryString + " &type=track";
+            String fullUrl = apiUrl + '?' + "q=" + queryString + "&type=track";
+            System.out.println("full Url: " + fullUrl); 
             OkHttpClient httpClient = new OkHttpClient();
             Request req = new Request.Builder().url(fullUrl).addHeader("Authorization", "Bearer " + accessToken).get()
                     .build();
             try (Response resp = httpClient.newCall(req).execute()) {
                 if (resp.isSuccessful()) {
                     String responseBody = resp.body().string();
+                    ObjectMapper mapper = new ObjectMapper();
+                    //parse response to conform to my custom SpotifyResponse model!  
+                    SpotifyResponse spotifResp = mapper.readValue(responseBody, SpotifyResponse.class); 
+                    List<TrackItem> tracks = spotifResp.getTracks().getItems(); 
+                    for(TrackItem ti: tracks){
+                        List<Artist> curTrackArtists = ti.getArtists(); 
+                        System.out.println("Starting to write names of artists for current track: " + ti.getName()); 
+                        for(Artist a: curTrackArtists){
+                            System.out.println("current artist: " + a.getName()); 
+                        }
+                        System.out.println("Done writing names!"); 
+                    }
+                    
                     return responseBody;
                 } else {
                     return "failed to fetch tracks from spotify /search api endpoint!";
@@ -55,7 +73,7 @@ public class FormController {
                 return "Error: " + e.getMessage();
             }
         } catch (Exception e) {
-            String errorMsg = "can't get access token";
+            String errorMsg = "can't get access token" + e.getMessage(); 
             return errorMsg;
         }
     }
