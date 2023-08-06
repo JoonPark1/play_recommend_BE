@@ -11,7 +11,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.example.play_app_backend.models.SpotifyResponse; 
 import com.example.play_app_backend.models.TrackItem; 
 import com.example.play_app_backend.models.Artist; 
+import com.example.play_app_backend.models.ParsedResponse;
+import com.example.play_app_backend.models.Song; 
 import java.util.List;
+import java.util.ArrayList; 
 
 @RestController
 @RequestMapping("/api")
@@ -56,16 +59,27 @@ public class FormController {
                     //parse response to conform to my custom SpotifyResponse model!  
                     SpotifyResponse spotifResp = mapper.readValue(responseBody, SpotifyResponse.class); 
                     List<TrackItem> tracks = spotifResp.getTracks().getItems(); 
+
+
+                    ParsedResponse pr = new ParsedResponse(); 
+                    List<Song> songs = new ArrayList<Song>(); 
                     for(TrackItem ti: tracks){
+                        Song newSong = new Song(); 
+                        newSong.setName(ti.getName()); 
+                        List<String> artistNames = new ArrayList<String>(); 
                         List<Artist> curTrackArtists = ti.getArtists(); 
                         System.out.println("Starting to write names of artists for current track: " + ti.getName()); 
                         for(Artist a: curTrackArtists){
+                            artistNames.add(a.getName()); 
                             System.out.println("current artist: " + a.getName()); 
                         }
+                        newSong.setArtists(artistNames); 
                         System.out.println("Done writing names!"); 
+                        songs.add(newSong); 
                     }
-                    
-                    return responseBody;
+                    pr.setSongs(songs); 
+                    String jsonResponse = mapper.writeValueAsString(pr);
+                    return jsonResponse; 
                 } else {
                     return "failed to fetch tracks from spotify /search api endpoint!";
                 }
