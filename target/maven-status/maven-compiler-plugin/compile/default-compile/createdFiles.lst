@@ -1,7 +1,14 @@
 com/example/play_app_backend/SpotifyApiClient.class
+com/example/play_app_backend/models/SpotifyResponse.class
 com/example/play_app_backend/controllers/AuthController.class
 com/example/play_app_backend/MyApplication.class
 com/example/play_app_backend/TokenResponse.class
+com/example/play_app_backend/models/ParsedResponse.class
+com/example/play_app_backend/models/TrackItem.class
 com/example/play_app_backend/CorsConfig.class
 com/example/play_app_backend/FormData.class
+com/example/play_app_backend/models/Feedback.class
+com/example/play_app_backend/models/Artist.class
+com/example/play_app_backend/models/Song.class
 com/example/play_app_backend/controllers/FormController.class
+com/example/play_app_backend/models/TrackList.class

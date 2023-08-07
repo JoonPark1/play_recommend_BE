@@ -8,7 +8,10 @@ public class TrackItem {
     @JsonProperty("artists")
     private List<Artist> artists; 
     @JsonProperty("name")
-    private String name; 
+    private String name;
+
+    @JsonProperty("id")
+    private String id;
 
     public List<Artist> getArtists(){
         return artists; 
@@ -16,5 +19,9 @@ public class TrackItem {
 
     public String getName(){
         return name; 
+    }
+
+    public String getId(){
+        return id;
     }
 }
