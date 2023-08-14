@@ -68,6 +68,8 @@ public class FormController {
                     for(TrackItem ti: tracks){
                         Song newSong = new Song();
                         String songName = ti.getName();
+                        System.out.println("song name: " + songName);
+                        System.out.println("song id: " + ti.getId());
                         if(h.contains(songName)){
                             continue;
                         }
@@ -84,6 +86,7 @@ public class FormController {
                         newSong.setArtists(artistNames);
                         //see if the song has a feedback: if so, set the custom feedback! Otherwise, default to liked cause we can't assume what user likes/dislikes for specific song!
                         for(Feedback f: userFeedback){
+                            System.out.println("feedback id: " + f.getSongId());
                             if(f.getSongId().equals(ti.getId())){
                                 boolean isLiked = f.getFeedbackType().equalsIgnoreCase("Thumbs Up");
                                 newSong.setLiked(isLiked);

@@ -24,4 +24,8 @@ public class Feedback {
     public String getSongName(){
         return name;
     }
+
+    public void setFeedbackType(String newFeedbackType){
+        this.feedbackType = newFeedbackType;
+    }
 }
